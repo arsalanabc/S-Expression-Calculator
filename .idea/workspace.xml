@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d173a162-e87a-4701-a944-18fadc36eed6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/s_expression/StringParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/project/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/project/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/s_expression/StringParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/s_expression/StringParser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +56,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -65,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1577913434569</updated>
-      <workItem from="1577913438935" duration="1059000" />
+      <workItem from="1577913438935" duration="1874000" />
     </task>
     <servers />
   </component>
