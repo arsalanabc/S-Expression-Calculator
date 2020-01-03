@@ -13,16 +13,16 @@ public class Calculator {
         operationsMap.put("*", new Multiplication());
     }
 
-    public void addOrUpdateOperation(String operand, Operation operation){
-        if(operationsMap.containsKey(operand)){
-            operationsMap.replace(operand, operation);
+    public void addOrUpdateOperation(String operator, Operation operation){
+        if(operationsMap.containsKey(operator)){
+            operationsMap.replace(operator, operation);
         } else {
-            operationsMap.put(operand, operation);
+            operationsMap.put(operator, operation);
         }
     }
 
-    public int calculate (String operand, int a, int b) throws NullPointerException {
-            Operation operation = operationsMap.get(operand);
+    public int calculate (String operator, int a, int b) throws NullPointerException {
+            Operation operation = operationsMap.get(operator);
             return operation.calc(a, b);
     }
 }
