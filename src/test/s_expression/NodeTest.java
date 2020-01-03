@@ -1,6 +1,6 @@
 package test.s_expression;
 
-import main.s_expression.Node;
+import main.calculator_app.Node;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

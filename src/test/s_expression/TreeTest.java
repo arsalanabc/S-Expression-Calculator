@@ -1,6 +1,6 @@
 package test.s_expression;
 
-import main.s_expression.Tree;
+import main.calculator_app.Tree;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

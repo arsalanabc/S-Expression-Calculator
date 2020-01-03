@@ -1,4 +1,4 @@
-package main.s_expression;
+package main.calculator_app;
 
 import java.util.ArrayList;
 import java.util.List;

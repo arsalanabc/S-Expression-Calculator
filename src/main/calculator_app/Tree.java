@@ -1,5 +1,6 @@
-package main.s_expression;
+package main.calculator_app;
 
+import java.util.EmptyStackException;
 import java.util.Set;
 import java.util.Stack;
 
@@ -10,7 +11,7 @@ public class Tree {
         return root;
     }
 
-    public void constructATree (String[] parsedString, Set<String> operatorSigns, String startExp, String endExp){
+    public void constructATree (String[] parsedString, Set<String> operatorSigns, String startExp, String endExp) throws EmptyStackException {
         Stack<Node> localRoot = new Stack<>();
         for (int i = 0; i < parsedString.length; i++) {
             if(parsedString[i].equals(startExp)) { // ignore (
