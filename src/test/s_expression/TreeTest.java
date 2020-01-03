@@ -3,18 +3,19 @@ package test.s_expression;
 import main.calculator_app.Tree;
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class TreeTest {
+    Tree tree = new Tree();
     @Test
     public void shouldMakeATree(){
         String[] expression = new String[]{"(","+","2","3",")"};
-        Tree tree = new Tree();
+
 
         Set<String> operatorSigns = new HashSet<>();
         operatorSigns.add("+");
@@ -32,6 +33,21 @@ class TreeTest {
         tree.constructATree(expression, operatorSigns, "(", ")");
         assertEquals(tree.getRoot().getData(), "*");
         assertTrue(tree.getRoot().isOperator());
+    }
+
+    @Test()
+    public void shouldThrowAnException (){
+        String[] expression = new String[]{"(","/","2","3",")"};
+
+        Set<String> operatorSigns = new HashSet<>();
+        operatorSigns.add("+");
+        operatorSigns.add("*");
+        try{
+            tree.constructATree(expression, operatorSigns, "(", ")");
+        } catch (EmptyStackException e){
+            assertTrue(true);
+        }
+
     }
 
 }
