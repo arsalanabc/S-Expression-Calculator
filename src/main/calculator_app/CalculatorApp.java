@@ -32,15 +32,13 @@ public class CalculatorApp {
             return this;
         }
 
-        Map<String, String> wordToSign_map = new HashMap<>(){{
-            put("add", "+");
-            put("multiply", "*");}
-        };
+        Map<String, String> wordToSign_map = new HashMap<>();
+        wordToSign_map.put("add", "+");
+        wordToSign_map.put("multiply", "*");
 
-        Map<String, String> parentheses_spacing_map = new HashMap<>(){{
-            put(open_parentheses, open_parentheses+delimiter);
-            put(close_parentheses, delimiter+close_parentheses);}
-        };
+        Map<String, String> parentheses_spacing_map = new HashMap<>();
+        parentheses_spacing_map.put(open_parentheses, open_parentheses+delimiter);
+        parentheses_spacing_map.put(close_parentheses, delimiter+close_parentheses);
 
         StringParser stringParser = new StringParser(input, wordToSign_map, parentheses_spacing_map, delimiter);
 
