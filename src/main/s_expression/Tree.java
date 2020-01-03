@@ -10,16 +10,16 @@ public class Tree {
         return root;
     }
 
-    public void constructATree (String[] parsedString, Set<String> operatorSigns){
+    public void constructATree (String[] parsedString, Set<String> operatorSigns, String startExp, String endExp){
         Stack<Node> localRoot = new Stack<>();
         for (int i = 0; i < parsedString.length; i++) {
-            if(parsedString[i].equals("(")) { // ignore (
+            if(parsedString[i].equals(startExp)) { // ignore (
                 continue;
             }
             if(operatorSigns.contains(parsedString[i])){ // operator for expression
                 localRoot.push(new Node(parsedString[i], true));
 
-            } else if(parsedString[i].equals(")")) // end of an expression
+            } else if(parsedString[i].equals(endExp)) // end of an expression
             {
                 Node tempNode = localRoot.pop(); // get the last node
                 if(localRoot.empty()){

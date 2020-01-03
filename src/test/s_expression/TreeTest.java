@@ -20,7 +20,7 @@ class TreeTest {
         operatorSigns.add("+");
         operatorSigns.add("*");
 
-        tree.constructATree(expression, operatorSigns);
+        tree.constructATree(expression, operatorSigns, "(", ")");
 
         assertEquals(tree.getRoot().getData(), "+");
         assertTrue(tree.getRoot().isOperator());
@@ -29,7 +29,7 @@ class TreeTest {
 
         expression = new String[]{"(","*","2","3",")"};
 
-        tree.constructATree(expression, operatorSigns);
+        tree.constructATree(expression, operatorSigns, "(", ")");
         assertEquals(tree.getRoot().getData(), "*");
         assertTrue(tree.getRoot().isOperator());
     }
