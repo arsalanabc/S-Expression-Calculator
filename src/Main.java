@@ -1,12 +1,12 @@
-
-import calculator.Calculator;
-import s_expression.StringParser;
+import main.calculator.Calculator;
+import main.calculator_app.CalculatorApp;
 
 public class Main {
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        StringParser stringParser = new StringParser(args[0].toString());
-        stringParser.passForCalculation(calculator, "+", 1, 3);
+        CalculatorApp calculatorApp = new CalculatorApp(calculator);
+        int result = calculatorApp.input(args[0]).process().output();
+        System.out.println(result);
     }
 }
