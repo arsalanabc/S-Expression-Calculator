@@ -1,4 +1,4 @@
-#S-Expression Calculator
+# S-Expression Calculator
 
 This is a simple calculator that takes an expression through command line argument.
 
@@ -14,14 +14,14 @@ For example here are some valid sample arguments to pass
 - (add 1 2)
 - (multiply 1 (add 1 (multiply 1 2)))
  
-###Project components
-###Calculator:
+### Project components
+### Calculator:
 Provides logic for addition and multiplication on integers
-###StringParser:
+### StringParser:
 Tokenizes the input by adding spaces around the brackets, replacing "add" and "multiply" 
 with + and * respectively, and lastly splitting by spaces.
 i.e. (add 1 2) => ["(", "+", "1", "2", ")"] 
-###CalculatorApp:
+### CalculatorApp:
 Acts like a bridge between StringParser and Calculator. It passes the user argument
 to StringParser which returns a tokenized string. CalculatorApp converts the tokenized 
 string into a Tree. Finally, it traverses the tree, evaluating nodes recursively with 
