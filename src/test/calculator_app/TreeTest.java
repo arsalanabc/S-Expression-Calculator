@@ -1,4 +1,4 @@
-package test.s_expression;
+package test.calculator_app;
 
 import main.calculator_app.Tree;
 import org.junit.jupiter.api.Test;

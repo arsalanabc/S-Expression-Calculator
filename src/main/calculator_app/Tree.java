@@ -5,22 +5,23 @@ import java.util.Set;
 import java.util.Stack;
 
 public class Tree {
-    Node root;
+
+    private Node root;
 
     public Node getRoot() {
         return root;
     }
 
-    public void constructATree (String[] parsedString, Set<String> operatorSigns, String startExp, String endExp) throws EmptyStackException {
+    public void constructATree (String[] tokens, Set<String> operatorSigns, String startExp, String endExp) throws EmptyStackException {
         Stack<Node> localRoot = new Stack<>();
-        for (int i = 0; i < parsedString.length; i++) {
-            if(parsedString[i].equals(startExp)) { // ignore (
+        for (int i = 0; i < tokens.length; i++) {
+            if(tokens[i].equals(startExp)) { // ignore (
                 continue;
             }
-            if(operatorSigns.contains(parsedString[i])){ // operator for expression
-                localRoot.push(new Node(parsedString[i], true));
+            if(operatorSigns.contains(tokens[i])){ // operator for expression
+                localRoot.push(new Node(tokens[i], true));
 
-            } else if(parsedString[i].equals(endExp)) // end of an expression
+            } else if(tokens[i].equals(endExp)) // end of an expression
             {
                 Node tempNode = localRoot.pop(); // get the last node
                 if(localRoot.empty()){
@@ -31,7 +32,7 @@ public class Tree {
                 }
             } else {
                 Node tempNode = localRoot.pop();
-                tempNode.addChild(new Node(parsedString[i], false)); // add values to children of operator node
+                tempNode.addChild(new Node(tokens[i], false)); // add values to children of operator node
                 localRoot.push(tempNode);
             }
         }
