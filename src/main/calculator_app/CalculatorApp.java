@@ -12,7 +12,6 @@ public class CalculatorApp {
 
     private final String PLUS_SIGN = "+";
     private final String MULTIPLY_SIGN = "*";
-    private final String SUBTRACT_SIGN = "-";
     private final String OPEN_PARENTHESIS = "(";
     private final String CLOSE_PARENTHESIS = ")";
     private final String DELIMITER = " ";
