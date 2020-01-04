@@ -4,6 +4,8 @@ import main.calculator.Calculator;
 import main.calculator_app.CalculatorApp;
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorAppTest {
@@ -12,9 +14,9 @@ class CalculatorAppTest {
 
     @Test
     public void shouldReturnSameInteger (){
-        int result = calculatorApp.input("123").process().output();
-        int result1 = calculatorApp.input("0").process().output();
-        int result2 = calculatorApp.input("1000001").process().output();
+        int result = calculatorApp.process("123");
+        int result1 = calculatorApp.process("0");
+        int result2 = calculatorApp.process("1000001");
 
         assertEquals(result, 123);
         assertEquals(result1, 0);
@@ -23,8 +25,8 @@ class CalculatorAppTest {
 
     @Test
     public void shouldAddTwoInteger (){
-        int result = calculatorApp.input("(add 1 2)").process().output();
-        int result2 = calculatorApp.input("(add 1 -2)").process().output();
+        int result = calculatorApp.process("(add 1 2)");
+        int result2 = calculatorApp.process("(add 1 -2)");
 
         assertEquals(result, 3);
         assertEquals(result2, -1);
@@ -32,28 +34,38 @@ class CalculatorAppTest {
 
     @Test
     public void shouldMultiplyTwoInteger (){
-        int result = calculatorApp.input("(multiply 3 2)").process().output();
-        int result2 = calculatorApp.input("(multiply -3 2)").process().output();
+        int result = calculatorApp.process("(multiply 3 2)");
+        int result2 = calculatorApp.process("(multiply -3 2)");
 
         assertEquals(result, 6);
-        assertEquals(result, -6);
+        assertEquals(result2, -6);
     }
 
     @Test
     public void shouldEvaluateNestedExpressions (){
-        int result = calculatorApp.input("(multiply (add 1 2) (add 1 (multiply 3 2)))").process().output();
+        int result = calculatorApp.process("(multiply (add 1 2) (add 1 (multiply 3 2)))");
         assertEquals(result, 21);
     }
 
     @Test
     public void shouldHandleZeros (){
-        int result = calculatorApp.input("(multiply 0 2)").process().output();
-        int result1 = calculatorApp.input("(add -3 0)").process().output();
-        int result2 = calculatorApp.input("(multiply (add 0 0) (add 0 (multiply 0 0)))").process().output();
-
+        int result = calculatorApp.process("(multiply 0 2)");
+        int result1 = calculatorApp.process("(add -3 0)");
+        int result2 = calculatorApp.process("(multiply (add 0 0) (add 0 (multiply 0 0)))");
 
         assertEquals(result, 0);
         assertEquals(result1, -3);
         assertEquals(result2, 0);
+    }
+
+    @Test
+    public void shouldThrowException(){
+        try {
+            int result = calculatorApp.process("(new 0 2)");
+        }
+        catch (EmptyStackException e){
+            assertTrue(e instanceof EmptyStackException);
+            assertTrue(true);
+        }
     }
 }

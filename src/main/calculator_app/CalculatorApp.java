@@ -1,79 +1,91 @@
 package main.calculator_app;
 
 import main.calculator.Calculator;
-import main.s_expression.Node;
 import main.s_expression.StringParser;
-import main.s_expression.Tree;
 
 import java.util.*;
 
 public class CalculatorApp {
-    String input;
-    Calculator calculator;
-    int result;
 
-    final String open_parentheses = "(";
-    final String close_parentheses = ")";
-    final String delimiter = " ";
+    Calculator calculator;
+    StringParser stringParser;
+
+    private final String PLUS_SIGN = "+";
+    private final String MULTIPLY_SIGN = "*";
+    private final String OPEN_PARENTHESIS = "(";
+    private final String CLOSE_PARENTHESIS = ")";
+    private final String DELIMITER = " ";
 
 
     public CalculatorApp(Calculator calculator){
         this.calculator = calculator;
     }
 
-    public CalculatorApp input (String input){
-        this.input = input;
-        return this;
-    }
-
-    public CalculatorApp process (){
-        if(!isExpression()){
-            result=Integer.parseInt(input);
-            return this;
+    public int process (String input){
+        if(!isExpression(input)){
+            return Integer.parseInt(input);
         }
 
-        Map<String, String> wordToSign_map = new HashMap<>();
-        wordToSign_map.put("add", "+");
-        wordToSign_map.put("multiply", "*");
+        Map<String, String> wordToSignMap = this.createWordToSignMap();
 
-        Map<String, String> parentheses_spacing_map = new HashMap<>();
-        parentheses_spacing_map.put(open_parentheses, open_parentheses+delimiter);
-        parentheses_spacing_map.put(close_parentheses, delimiter+close_parentheses);
+        Map<String, String> parenthesesSpacingMap = this.createParenthesesSpacingMap(OPEN_PARENTHESIS,
+                CLOSE_PARENTHESIS, DELIMITER);
 
-        StringParser stringParser = new StringParser(input, wordToSign_map, parentheses_spacing_map, delimiter);
-
+        this.stringParser = new StringParser(input, wordToSignMap, parenthesesSpacingMap, DELIMITER);
         String[] parsedString = stringParser.TokenizeExpression();
 
-        Set<String> operatorSigns = new HashSet<>();
-        operatorSigns.addAll(wordToSign_map.values());
+        Set<String> operatorSigns = this.createOperatorSignsSet(wordToSignMap);
 
-        Tree tree = new Tree();
-        tree.constructATree(parsedString, operatorSigns, open_parentheses, close_parentheses);
-        result = evaluateExpressionTree(tree.getRoot());
-        return this;
-    }
-
-    public int output (){
-        return result;
-    }
-
-    private boolean isExpression(){
-        return input.contains(open_parentheses) && input.contains(close_parentheses);
+        try {
+            Tree tree = new Tree();
+            tree.constructATree(parsedString, operatorSigns, OPEN_PARENTHESIS, CLOSE_PARENTHESIS);
+            return evaluateExpressionTree(tree.getRoot());
+        } catch (EmptyStackException e) {
+            System.out.println("Invalid input");
+            throw e;
+        }
     }
 
     private int evaluateExpressionTree(Node node){
-        int ans = 0;
-        if (node.getChildren().isEmpty()){
+        int answer;
+        if (node.getChildren().isEmpty() && !node.isOperator()){
             return Integer.parseInt(node.getData());
         }
-        else if(node.isOperator()){
-            ans = node.getData().equals("+")?0:1;
+        else {
+            answer = node.getData().equals(PLUS_SIGN)?0:1;
             for (int i = 0; i < node.getChildren().size(); i++) {
-                ans = this.calculator.calculate(node.getData(),
+                answer = this.calculator.calculate(node.getData(),
                         evaluateExpressionTree(node.getChildren().get(i)),
-                        ans);
+                        answer);
             }
         }
-        return ans;
+        return answer;
+    }
+
+    private Set<String> createOperatorSignsSet(Map<String, String> wordToSignMap) {
+        Set<String> signsSet = new HashSet<>();
+        signsSet.addAll(wordToSignMap.values());
+        return signsSet;
+    }
+
+    private Map<String, String> createWordToSignMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("add", PLUS_SIGN);
+        map.put("multiply", MULTIPLY_SIGN);
+
+        return map;
+    }
+
+    private Map<String, String> createParenthesesSpacingMap(String open_parentheses, String close_parentheses,
+                                                            String delimiter){
+        Map<String, String> map = new HashMap<>();
+        map.put(open_parentheses, open_parentheses+delimiter);
+        map.put(close_parentheses, delimiter+close_parentheses);
+
+        return map;
+    }
+
+    private boolean isExpression(String input){
+        return input.contains(OPEN_PARENTHESIS) && input.contains(CLOSE_PARENTHESIS);
     }
 }
