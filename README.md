@@ -29,6 +29,10 @@ Calculator.
 CalculatorApp also defines rules for mapping signs to keywords, brackets and brackets spacing to
 maintain integrity for StringParser and Calculator contract.
 
+### Using the Calculator
+- Compile the project with `javac`
+- Run `Main.java` with input argument
+
 ### To update or add a new operation to Calculator
 #### Pre-compile
 1. Implement `Operation` interface i.e `Division` in `Calculator.Operation` package
