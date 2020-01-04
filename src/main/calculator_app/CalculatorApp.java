@@ -12,6 +12,7 @@ public class CalculatorApp {
 
     private final String PLUS_SIGN = "+";
     private final String MULTIPLY_SIGN = "*";
+    private final String SUBTRACT_SIGN = "-";
     private final String OPEN_PARENTHESIS = "(";
     private final String CLOSE_PARENTHESIS = ")";
     private final String DELIMITER = " ";
@@ -47,16 +48,15 @@ public class CalculatorApp {
     }
 
     private int evaluateExpressionTree(Node node){
-        int answer;
+        int answer = 0;
         if (node.getChildren().isEmpty() && !node.isOperator()){
             return Integer.parseInt(node.getData());
         }
         else {
-            answer = node.getData().equals(PLUS_SIGN)?0:1;
-            for (int i = 0; i < node.getChildren().size(); i++) {
+            for (int i = 1; i < node.getChildren().size(); i++) {
                 answer = this.calculator.calculate(node.getData(),
-                        evaluateExpressionTree(node.getChildren().get(i)),
-                        answer);
+                        evaluateExpressionTree(node.getChildren().get(0)),
+                        evaluateExpressionTree(node.getChildren().get(i)));
             }
         }
         return answer;
