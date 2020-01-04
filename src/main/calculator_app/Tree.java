@@ -15,20 +15,20 @@ public class Tree {
     public void constructATree (String[] tokens, Set<String> operatorSigns, String startExp, String endExp) throws EmptyStackException {
         Stack<Node> localRoot = new Stack<>();
         for (int i = 0; i < tokens.length; i++) {
-            if(tokens[i].equals(startExp)) { // ignore (
+            if(tokens[i].equals(startExp)) {
                 continue;
             }
-            if(operatorSigns.contains(tokens[i])){ // operator for expression
+            if(operatorSigns.contains(tokens[i])){
                 localRoot.push(new Node(tokens[i], true));
 
-            } else if(tokens[i].equals(endExp)) // end of an expression
+            } else if(tokens[i].equals(endExp))
             {
-                Node tempNode = localRoot.pop(); // get the last node
+                Node tempNode = localRoot.pop();
                 if(localRoot.empty()){
-                    this.root = tempNode; // if there is only one expression return it as the root of the tree
+                    this.root = tempNode;
                 } else {
-                    Node tail = localRoot.peek(); //
-                    tail.addChild(tempNode); // add the children from last node to trailing node
+                    Node tail = localRoot.peek();
+                    tail.addChild(tempNode); // add the children from last node to tailing node
                 }
             } else {
                 Node tempNode = localRoot.pop();
