@@ -30,10 +30,24 @@ CalculatorApp also defines rules for mapping signs to keywords, brackets and bra
 maintain integrity for StringParser and Calculator contract.
 
 ### To update or add a new operation to Calculator
-1. Implement `Operation` interface i.e `Division`
-2.  Create a operator sign i.e "/"
-3. pass the sign and the new operation to `Calculator` with `addOrUpdateOperation`
+#### Pre-compile
+1. Implement `Operation` interface i.e `Division` in `Calculator.Operation` package
+   - `Operation divide = new Division());`
+2. Add new operation to  `operationsMap` in `Calculator` constructor
+   - `operationsMap.put("/", new Division());`
+3. Create a operator SIGN field i.e "/" in `CalculatorApp`
+   - `private final String DIVIDE_SIGN = "-";`
 4. update `wordToSign_map` in `CalculatorApp`
+   - `map.put("divide", DIVIDE_SIGN);`
+   
+#### In Runtime from CalculatorApp
+1. Do step 3 and 4 from pre-compile instructions
+1. Create new Operation in `CalculatorApp`
+   - `Operation subtract = new Subtraction());`
+2. Add SIGN and new operation to the `Calculator` instance
+   - `this.calculator.addOrUpdateOperation(SUBTRACT_SIGN, new Subtraction());`
+
+
 
 
 
