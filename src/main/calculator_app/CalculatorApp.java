@@ -41,7 +41,7 @@ public class CalculatorApp {
             tree.constructATree(parsedString, operatorSigns, OPEN_PARENTHESIS, CLOSE_PARENTHESIS);
             return evaluateExpressionTree(tree.getRoot());
         } catch (EmptyStackException e) {
-            System.out.println("Invalid input");
+            System.out.println("Invalid input: Most likely caused by an unknown operation.");
             throw e;
         }
     }
